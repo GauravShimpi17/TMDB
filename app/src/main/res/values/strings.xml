@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TMDB</string>
+    <string name="header_title">What do you want to watch today?</string>
+    <string-array name="category_list">
+        <item>Films</item>
+        <item>Series</item>
+        <item>Anime</item>
+        <item>Novels</item>
+        <item>Biography</item>
+    </string-array>
+    <string name="description">Após cumprir pena por um crime violento, Ruth volta ao convívio na sociedade, que se recusa a perdoar seu passado. Discriminada no lugar que já chamou de lar, sua única esperança é encontrar a irmã, que ela havia sido forçada a deixar para trás.</string>
+</resources>

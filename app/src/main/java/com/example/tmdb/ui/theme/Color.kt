@@ -12,4 +12,11 @@ val Pink40 = Color(0xFF7D5260)
 
 val SearchBg = Color(0xFF36076B)
 val summaryBg = Color(0xFF15151D)
-val summartTxtColor = Color(0xFFCCCCCC)
+val summaryTxtColor = Color(0xFFCCCCCC)
+val ratingTxtColor = Color(0xFFFF8700)
+
+val btnGrad1 = Color(0xFF8000FF)
+val btnGrad2 = Color(0xFF540BA1)
+
+val gradColor1 = Color(0xFF8000FF)
+val gradColor2 = Color(0xFF000000)

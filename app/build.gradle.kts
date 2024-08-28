@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -11,6 +13,7 @@ android {
     namespace = "com.example.tmdb"
     compileSdk = 35
 
+    android.buildFeatures.buildConfig = true
     defaultConfig {
         applicationId = "com.example.tmdb"
         minSdk = 24
@@ -22,6 +25,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        val properties = Properties().apply {
+            load(project.rootProject.file("secret.properties").inputStream())
+        }
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
     }
 
     buildTypes {

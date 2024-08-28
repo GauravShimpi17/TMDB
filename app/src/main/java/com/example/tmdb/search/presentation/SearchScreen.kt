@@ -2,18 +2,20 @@ package com.example.tmdb.search.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
@@ -42,7 +44,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
@@ -60,13 +61,13 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.example.tmdb.R
 import com.example.tmdb.Screen
-import com.example.tmdb.data.remote.MovieApi
-import com.example.tmdb.presentation.movieDetailScreen.TextWithStartIcon
+import com.example.tmdb.core.presentation.component.TextWithStartIcon
+import com.example.tmdb.home.data.remote.MovieApi
+import com.example.tmdb.search.domain.model.Search
 import com.example.tmdb.ui.theme.SearchBg
 import com.example.tmdb.ui.theme.gradColor1
 import com.example.tmdb.ui.theme.gradColor2
 import com.example.tmdb.ui.theme.ratingTxtColor
-import com.example.tmdb.ui.theme.summaryBg
 import com.example.tmdb.ui.theme.summaryTxtColor
 import com.example.tmdb.util.Resource
 import java.util.Locale
@@ -123,6 +124,12 @@ fun SearchScreen(
             }
         )
 
+
+
+       /* SearchList(list = searchResults.list,
+            onClick = { navController.navigate(Screen.MovieDetailScreen(id = it)) },
+            onLastReached = { TODO })
+*/
         if (searchResults is Resource.Loading) {
             CircularProgressIndicator(
                 modifier = Modifier
@@ -142,6 +149,49 @@ fun SearchScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun SearchList(
+    list: List<Search>,
+    onClick: () -> Unit,
+    onLastReached: () -> Unit,
+    modifier: Modifier = Modifier,
+    isLoading: Boolean = false
+){
+    LazyRow(
+        modifier = Modifier
+            .padding(start = 10.dp)
+            .then(modifier),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        itemsIndexed(items = list) { i, movie ->
+            if (i == list.size - 1) {
+                onLastReached()
+            }
+            SearchItem(image = movie.posterPath ?: "",
+                title = movie.title,
+                releaseDate = movie.releaseDate,
+                rating = movie.voteAverage) {
+                onClick()
+            }
+        }
+        item {
+            if (isLoading) {
+                SearchItemLoading()
+            }
+        }
+    }
+}
+
+@Composable
+fun SearchItemLoading(){
+    Column {
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp)
+            .background(Color.Black.copy(alpha = 0.5f)))
     }
 }
 

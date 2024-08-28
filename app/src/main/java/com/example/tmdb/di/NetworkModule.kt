@@ -1,8 +1,11 @@
 package com.example.tmdb.di
 
-import com.example.tmdb.data.remote.MovieApi
-import com.example.tmdb.data.repository.MovieListRepoImpl
-import com.example.tmdb.domain.repository.MovieListRepo
+import com.example.tmdb.home.data.remote.MovieApi
+import com.example.tmdb.home.data.repository.MovieListRepoImpl
+import com.example.tmdb.home.domain.repository.MovieListRepo
+import com.example.tmdb.movieDetail.data.remote.MovieDetailApi
+import com.example.tmdb.movieDetail.data.repository.MovieDetailRepoImpl
+import com.example.tmdb.movieDetail.domain.repository.MovieDetailRepo
 import com.example.tmdb.search.data.remote.SearchApi
 import com.example.tmdb.search.data.repository.SearchRepository
 import com.example.tmdb.search.domain.repository.SearchRepositoryImpl
@@ -44,20 +47,16 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideMovieDetailApi(retrofit: Retrofit): MovieDetailApi {
+        return retrofit.create(MovieDetailApi::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideSearchApi(retrofit: Retrofit): SearchApi {
         return retrofit.create(SearchApi::class.java)
     }
 
 
-    @Provides
-    @Singleton
-    fun provideMovieRepo(movieApi: MovieApi): MovieListRepo {
-        return MovieListRepoImpl(movieApi)
-    }
 
-    @Provides
-    @Singleton
-    fun provideSearchRepo(searchApi: SearchApi) : SearchRepository{
-        return SearchRepositoryImpl(searchApi)
-    }
 }

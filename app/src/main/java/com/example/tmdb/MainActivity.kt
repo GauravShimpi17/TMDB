@@ -36,8 +36,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.tmdb.presentation.home.Homepage
-import com.example.tmdb.presentation.movieDetailScreen.MovieDetail
+import com.example.tmdb.home.presentation.Homepage
+import com.example.tmdb.movieDetail.presentation.MovieDetail
 import com.example.tmdb.search.presentation.SearchScreen
 import com.example.tmdb.ui.theme.TMDBTheme
 import com.example.tmdb.ui.theme.btnGrad1
